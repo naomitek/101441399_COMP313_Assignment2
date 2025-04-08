@@ -1,0 +1,164 @@
+<div class="employees-page">
+  <div class="actions-bar">
+    <button (click)="showAddForm()" class="add-employee-button">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="add-icon">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+      </svg>
+      Add Employee
+    </button>
+  </div>
+
+  <div *ngIf="showForm" class="employee-form-card">
+    <h2>{{ editMode ? 'Edit Employee' : 'Add New Employee' }}</h2>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" formControlName="first_name" placeholder="Enter first name" />
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" formControlName="last_name" placeholder="Enter last name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" placeholder="Enter email address" />
+      </div>
+      <div class="form-group">
+        <label for="designation">Designation:</label>
+        <input type="text" id="designation" formControlName="designation" placeholder="Enter designation" />
+      </div>
+      <div class="form-group">
+        <label for="department">Department:</label>
+        <input type="text" id="department" formControlName="department" placeholder="Enter department" />
+      </div>
+      <div class="form-group">
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" formControlName="salary" placeholder="Enter salary" />
+      </div>
+      <div class="form-group">
+        <label for="date_of_joining">Date of Joining:</label>
+        <input type="date" id="date_of_joining" formControlName="date_of_joining" />
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" formControlName="gender">
+          <option value="" disabled>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="photo">Upload Photo:</label>
+        <input type="file" id="photo" (change)="onFileSelected($event)" />
+        <img *ngIf="selectedImage" [src]="selectedImage" alt="Employee Photo" class="preview-image" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button" [disabled]="employeeForm.invalid">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="submit-icon">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+          </svg>
+          {{ editMode ? 'Update Employee' : 'Save Employee' }}
+        </button>
+        <button type="button" class="cancel-button" (click)="resetForm()">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="cancel-icon">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="employee-list-section">
+    <h2>Employee List</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th class="actions-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employees" class="employee-row">
+            <td>{{ emp.first_name }} {{ emp.last_name }}</td>
+            <td>{{ emp.email }}</td>
+            <td class="actions-cell">
+              <button class="action-button view-button" (click)="viewDetails(emp)">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="view-icon">
+                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                </svg>
+                View
+              </button>
+              <button class="action-button edit-button" (click)="editEmployee(emp)">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="edit-icon">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0L15.19 5.63l3.75 3.75 2.3-2.3zm-1.59 1.59l-3.75-3.75-1.59 1.59 3.75 3.75z"/>
+                </svg>
+                Edit
+              </button>
+              <button class="action-button delete-button" (click)="deleteEmployee(emp.id)">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="delete-icon">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                </svg>
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="selectedEmployee" class="employee-details-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Employee Details</h3>
+        <button type="button" class="close-button" (click)="selectedEmployee = null" aria-label="Close employee details modal">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="close-icon">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedEmployee.employee_photo" class="detail-photo-container">
+          <img [src]="selectedEmployee.employee_photo" alt="Employee Photo" class="detail-employee-photo" />
+        </div>
+        <div class="detail-info-grid">
+          <div class="detail-info-item">
+            <span class="label">Name:</span>
+            <span class="value">{{ selectedEmployee.first_name }} {{ selectedEmployee.last_name }}</span>
+          </div>
+          <div class="detail-info-item">
+            <span class="label">Email:</span>
+            <span class="value">{{ selectedEmployee.email }}</span>
+          </div>
+          <div class="detail-info-item">
+            <span class="label">Department:</span>
+            <span class="value">{{ selectedEmployee.department }}</span>
+          </div>
+          <div class="detail-info-item">
+            <span class="label">Designation:</span>
+            <span class="value">{{ selectedEmployee.designation }}</span>
+          </div>
+          <div class="detail-info-item">
+            <span class="label">Salary:</span>
+            <span class="value">${{ selectedEmployee.salary }}</span>
+          </div>
+          <div class="detail-info-item">
+            <span class="label">Gender:</span>
+            <span class="value">{{ selectedEmployee.gender }}</span>
+          </div>
+          <div class="detail-info-item">
+            <span class="label">Joined On:</span>
+            <span class="value">{{ selectedEmployee.date_of_joining }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

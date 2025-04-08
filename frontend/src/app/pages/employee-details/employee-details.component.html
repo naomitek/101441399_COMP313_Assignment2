@@ -1,0 +1,46 @@
+<div *ngIf="employee" class="employee-details">
+  <div class="details-header">
+    <h2>Employee Profile</h2>
+  </div>
+  <div class="details-body">
+    <div *ngIf="employee.employee_photo" class="photo-container">
+      <img [src]="employee.employee_photo" alt="Employee Photo" class="employee-photo" />
+    </div>
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="label">Name:</span>
+        <span class="value">{{ employee.first_name }} {{ employee.last_name }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Email:</span>
+        <span class="value">{{ employee.email }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Gender:</span>
+        <span class="value">{{ employee.gender }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Designation:</span>
+        <span class="value">{{ employee.designation }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Department:</span>
+        <span class="value">{{ employee.department }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Salary:</span>
+        <span class="value">${{ employee.salary }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Joined On:</span>
+        <span class="value">{{ employee.date_of_joining }}</span>
+      </div>
+    </div>
+    <button (click)="goBack()" class="back-button">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="back-icon">
+        <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21v-2z"/>
+      </svg>
+      Back to List
+    </button>
+  </div>
+</div>

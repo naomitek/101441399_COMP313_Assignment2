@@ -1,0 +1,129 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fbc02d 0%, #ffeb3b 100%); /* A bright, cheerful gradient */
+}
+
+.signup-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 3rem;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.signup-header {
+  margin-bottom: 2.5rem;
+
+  .user-icon {
+    width: 40px;
+    height: 40px;
+    color: #f9a825; /* A golden yellow */
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: #34495e; /* Dark, readable text */
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    color: #7f8c8d; /* Softer gray */
+    font-size: 0.9rem;
+  }
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+
+  .form-group {
+    margin-bottom: 1.8rem;
+    text-align: left;
+
+    label {
+      display: block;
+      color: #2c3e50; /* Another dark, readable color */
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      border: 1px solid #d1d8e0;
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      background-color: #f8f9fa;
+
+      .input-icon {
+        width: 20px;
+        height: 20px;
+        color: #95a5a6; /* Medium gray */
+        margin-right: 0.8rem;
+      }
+
+      input {
+        flex-grow: 1;
+        border: none;
+        background: transparent;
+        padding: 0.6rem 0;
+        font-size: 1rem;
+        color: #34495e;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .error {
+      font-size: 0.8rem;
+      color: #e74c3c; /* A noticeable red */
+      margin-top: 0.4rem;
+    }
+  }
+
+  .error-message,
+  .success-message {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .error-message {
+    color: #e74c3c;
+  }
+
+  .success-message {
+    color: #27ae60; /* A positive green */
+  }
+
+  .signup-button {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    background-color: #f9a825; /* Golden yellow button */
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #f08c19;
+    }
+
+    &:disabled {
+      background-color: #ffdc73;
+      cursor: not-allowed;
+    }
+  }
+}

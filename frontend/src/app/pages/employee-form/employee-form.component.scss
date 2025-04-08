@@ -1,0 +1,60 @@
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  input,
+  select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  img {
+    margin: 1rem 0;
+    border-radius: 8px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-save {
+      background-color: rgba(0, 128, 0, 0.1); // verde transparente
+      color: green;
+    }
+
+    .btn-cancel {
+      background-color: rgba(255, 0, 0, 0.1); // rojo transparente
+      color: red;
+    }
+  }
+}
+
+  
+  
